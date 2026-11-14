@@ -1,0 +1,25 @@
+# Configuración para Render ("Blueprint"): describe el servidor como código.
+# En Render: New → Blueprint → elegir este repo, y crea todo solo.
+
+services:
+  - type: web
+    name: turnobot-api
+    runtime: docker
+    plan: free
+    region: virginia            # la región de Render más cercana a Argentina
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /api/chat/modo
+    autoDeploy: true
+    buildFilter:
+      paths:
+        - backend/**            # solo se vuelve a publicar si cambia el backend
+    envVars:
+      - key: JWT_SECRET
+        generateValue: true     # Render genera una clave aleatoria: nadie la conoce
+      - key: ADMIN_PASSWORD
+        value: demo1234         # es una demo pública con datos inventados
+      - key: CORS_ORIGINS
+        value: https://juancho2264.github.io
+      - key: H2_CONSOLE
+        value: "false"

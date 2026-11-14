@@ -51,6 +51,12 @@
 .burbuja--yo { align-self: flex-end; background: var(--chat-mio); border-top-right-radius: 4px; }
 .burbuja--error { border: 1px solid var(--peligro); }
 
+.chat__aviso {
+  align-self: center; max-width: 90%; margin-top: 6px;
+  font-size: .78rem; text-align: center; color: var(--tenue);
+  background: rgb(255 255 255 / .6); border-radius: 8px; padding: 6px 10px;
+}
+
 .burbuja--escribiendo { display: flex; gap: 4px; padding: 12px 14px; }
 .burbuja--escribiendo span {
   width: 7px; height: 7px; border-radius: 50%; background: var(--tenue);

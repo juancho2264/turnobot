@@ -15,6 +15,7 @@ export default function Chat({ nombreNegocio }) {
   const [mensajes, setMensajes] = useState([]);
   const [texto, setTexto] = useState('');
   const [escribiendo, setEscribiendo] = useState(false);
+  const [lento, setLento] = useState(false);
   const sesion = useRef(nuevaSesion());
   const fin = useRef(null);
   const contador = useRef(0);
@@ -37,6 +38,8 @@ export default function Chat({ nombreNegocio }) {
     ocupado.current = true;
     if (mostrar) agregar({ de: 'yo', texto: limpio });
     setEscribiendo(true);
+    // El servidor gratis se "duerme" si nadie lo usa: si tarda, avisamos en vez de parecer roto
+    const avisoLento = setTimeout(() => setLento(true), 3000);
     try {
       // Pedimos la respuesta y esperamos un mínimo para que el "escribiendo..." se vea natural
       const [respuesta] = await Promise.all([enviarMensaje(sesion.current, limpio), esperar(450)]);
@@ -49,6 +52,8 @@ export default function Chat({ nombreNegocio }) {
         error: true,
       });
     } finally {
+      clearTimeout(avisoLento);
+      setLento(false);
       ocupado.current = false;
       setEscribiendo(false);
       if (pendiente.current) {
@@ -106,6 +111,11 @@ export default function Chat({ nombreNegocio }) {
           <div className="burbuja burbuja--bot burbuja--escribiendo" aria-label="El bot está escribiendo">
             <span /><span /><span />
           </div>
+        )}
+        {lento && (
+          <p className="chat__aviso">
+            El servidor de la demo es gratuito y se estaba durmiendo 😴. La primera respuesta puede tardar hasta un minuto.
+          </p>
         )}
         <div ref={fin} />
       </div>

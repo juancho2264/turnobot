@@ -99,6 +99,16 @@ mvn test
 | `PATCH` | `/api/admin/turnos/{id}/estado` | token | cambiar el estado de un turno |
 | `GET` | `/api/admin/estadisticas?fecha=` | token | números del día y de la semana |
 
+## Publicación
+
+| Parte | Dónde | Cómo |
+|---|---|---|
+| Backend | [Render](https://render.com) (plan gratis) | `render.yaml` + `backend/Dockerfile`. Se vuelve a publicar solo cuando cambia `backend/` |
+| Frontend | GitHub Pages | `.github/workflows/frontend.yml`. Se vuelve a publicar solo cuando cambia `frontend/` |
+| Tests | GitHub Actions | `.github/workflows/tests.yml` corre `mvn test` en cada push |
+
+El `Dockerfile` usa dos etapas (compila con Maven y ejecuta con una imagen chica de Java), corre sin permisos de root y limita la memoria de Java para entrar en los 512 MB del plan gratis. El servidor gratis se apaga si nadie lo usa, y el chat avisa si la primera respuesta tarda.
+
 ## Variables de entorno (producción)
 
 | Variable | Para qué |
@@ -113,7 +123,7 @@ mvn test
 
 - [ ] Motor con IA real (Claude + *tool use*) como segunda implementación de `ChatEngine`
 - [ ] Recordatorios automáticos por WhatsApp el día anterior
-- [ ] Publicar el backend en Google Cloud Run y el frontend en GitHub Pages
+- [ ] Base de datos persistente (PostgreSQL) para usarlo con un negocio real
 
 ---
 
