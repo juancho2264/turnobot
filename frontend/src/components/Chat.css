@@ -85,12 +85,15 @@
   font-weight: 700; color: var(--acento);
 }
 
+/* Los botones bajan de línea cuando no entran (flex-wrap), así se ven todos con mouse o con dedo.
+   Antes se desplazaban de costado, pero en la compu no había forma de llegar a los últimos. */
 .chat__opciones {
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
-  overflow-x: auto;
   padding: 8px 12px;
-  scrollbar-width: none;
+  max-height: 136px; /* si alguna vez hay muchísimas, aparece scroll vertical */
+  overflow-y: auto;
 }
 .chat__opciones button {
   flex-shrink: 0;
