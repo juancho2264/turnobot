@@ -1,0 +1,17 @@
+# Backend (Maven)
+backend/target/
+
+# Frontend (Node)
+frontend/node_modules/
+frontend/dist/
+
+# Variables de entorno: pueden tener claves. NUNCA se suben.
+.env
+.env.*
+!.env.example
+
+# Editores y sistema
+.idea/
+.vscode/
+*.iml
+.DS_Store

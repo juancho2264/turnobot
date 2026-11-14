@@ -1,0 +1,46 @@
+# Configuración de TurnoBot.
+# Los valores con ${VARIABLE:valor} se pueden cambiar con variables de entorno
+# sin tocar el código (así se configura en producción).
+
+server:
+  port: ${PORT:8080}
+
+spring:
+  application:
+    name: turnobot
+  datasource:
+    url: ${DATABASE_URL:jdbc:h2:mem:turnobot;DB_CLOSE_DELAY=-1}
+    username: ${DATABASE_USER:sa}
+    password: ${DATABASE_PASSWORD:}
+  jpa:
+    hibernate:
+      ddl-auto: ${DDL_AUTO:create-drop}
+    open-in-view: false
+  h2:
+    console:
+      enabled: ${H2_CONSOLE:true}
+
+# Reglas del negocio: cambiando esto, el bot sirve para cualquier rubro
+negocio:
+  nombre: Barbería El Faro
+  direccion: Av. Siempreviva 742, Buenos Aires
+  zona-horaria: America/Argentina/Buenos_Aires
+  apertura: "10:00"
+  cierre: "20:00"
+  dias-laborales: [TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY]
+  intervalo-minutos: 15
+  anticipacion-minima-minutos: 30
+  dias-de-reserva: 14
+
+# Usuario del panel. En producción se definen con variables de entorno.
+admin:
+  usuario: ${ADMIN_USER:admin}
+  password: ${ADMIN_PASSWORD:demo1234}
+
+jwt:
+  # Clave para firmar los tokens. La de acá es SOLO para desarrollo.
+  secreto: ${JWT_SECRET:clave-de-desarrollo-cambiar-en-produccion-minimo-32-caracteres}
+  expiracion-minutos: 480
+
+cors:
+  origenes: ${CORS_ORIGINS:http://localhost:5173}

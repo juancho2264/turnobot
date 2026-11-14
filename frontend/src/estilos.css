@@ -1,0 +1,68 @@
+/* Estilos globales: variables de diseño, base y componentes compartidos.
+   Cambiando las variables de :root se adapta a la marca de cualquier negocio. */
+
+:root {
+  --fondo: #f5f0e7;
+  --superficie: #fffdf9;
+  --tinta: #1f1c18;
+  --tenue: #6d655a;
+  --linea: #e6dece;
+  --linea-fuerte: #d3c8b5;
+  --marca: #1f4a3f;
+  --marca-suave: #e1ece6;
+  --acento: #b67a2e;
+  --peligro: #b5432b;
+  --chat-fondo: #ece5d8;
+  --chat-mio: #d9ecd2;
+
+  --titulo: 'Fraunces', Georgia, serif;
+  --texto: 'Inter', system-ui, sans-serif;
+  --radio: 14px;
+  --sombra: 0 6px 20px -8px rgb(40 30 15 / .25);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+body {
+  font-family: var(--texto);
+  color: var(--tinta);
+  background: var(--fondo);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+button { font: inherit; color: inherit; cursor: pointer; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--acento); outline-offset: 2px; }
+
+.etiqueta { font-size: .78rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--acento); }
+.tenue { color: var(--tenue); }
+
+.barra {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--linea);
+  background: var(--superficie);
+}
+@media (min-width: 760px) { .barra { padding: 14px 32px; } }
+.barra__logo { font-family: var(--titulo); font-size: 1.35rem; font-weight: 600; text-decoration: none; }
+.barra__logo b { color: var(--acento); }
+.barra__acciones { display: flex; gap: 8px; }
+
+.boton {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 10px 18px; border-radius: 999px;
+  border: 1px solid var(--marca); background: var(--marca); color: #fff;
+  font-weight: 600; font-size: .9rem; text-decoration: none;
+  transition: background .15s, color .15s;
+}
+.boton:hover { background: #163830; }
+.boton:disabled { opacity: .6; cursor: default; }
+.boton--borde { background: transparent; color: var(--marca); }
+.boton--borde:hover { background: var(--marca); color: #fff; }
+.boton--chico { padding: 6px 12px; font-size: .82rem; background: var(--superficie); color: var(--marca); }
+.boton--chico:hover { background: var(--marca); color: #fff; }
+.boton--peligro { border-color: var(--peligro); color: var(--peligro); }
+.boton--peligro:hover { background: var(--peligro); color: #fff; }
+
+.pie { text-align: center; padding: 20px 16px; font-size: .82rem; color: var(--tenue); border-top: 1px solid var(--linea); }
+.pie a { color: var(--marca); font-weight: 600; }
